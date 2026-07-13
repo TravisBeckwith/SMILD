@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "smild"
+version = "0.1.0.dev0"
+description = "Standard Model Inter-branch Likelihood Distance: voxelwise parameter identifiability for diffusion MRI"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.24",
+    "scipy>=1.10",
+]
+
+[project.optional-dependencies]
+dev = [
+    "matplotlib>=3.7",
+    "pytest>=7.4",
+    "pytest-cov",
+]
+full = [
+    "matplotlib>=3.7",
+    "pandas",
+    "nibabel>=5.0",
+]
+
+[project.urls]
+Repository = "https://github.com/you/smild"
+Documentation = "https://github.com/you/smild/blob/main/docs/"
+Issues = "https://github.com/you/smild/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["smild*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short"
