@@ -27,9 +27,9 @@ full = [
 ]
 
 [project.urls]
-Repository = "https://github.com/you/smild"
-Documentation = "https://github.com/you/smild/blob/main/docs/"
-Issues = "https://github.com/you/smild/issues"
+Repository = "https://github.com/TravisBeckwith/SMILD"
+Documentation = "https://github.com/TravisBeckwith/SMILD/blob/main/docs/"
+Issues = "https://github.com/TravisBeckwith/SMILD/issues"
 
 [tool.setuptools.packages.find]
 where = ["."]

@@ -1,0 +1,116 @@
+cff-version: 1.2.0
+message: "If you use SMILD in your research, please cite it using the metadata below."
+type: software
+title: "SMILD: Standard Model Inter-branch Likelihood Distance"
+abstract: >
+  A voxelwise measure of practical parameter identifiability for biophysical
+  diffusion MRI. The Standard Model of white-matter diffusion is intrinsically
+  degenerate under conventional single-encoding multi-shell acquisition: two
+  distinct parameter sets explain the measured signal equally well (the two
+  'branches'). SMILD quantifies the noise-normalized distance between the
+  branch solutions in signal space, providing a per-voxel reliability map for
+  any Standard-Model-derived microstructure estimate (NODDI, WMTI, SMT, etc.).
+  High SMILD indicates high degeneracy — the estimate is not meaningfully
+  constrained by the data. Low SMILD indicates the branches are distinguishable
+  — the estimate is trustworthy. SMILD does not resolve the degeneracy; it
+  measures and reports it, enabling downstream analyses to weight, mask, or
+  stratify by voxelwise reliability.
+version: 0.1.0
+date-released: "2026-07-13"
+license: MIT
+repository-code: "https://github.com/TravisBeckwith/SMILD"
+url: "https://github.com/TravisBeckwith/SMILD"
+identifiers:
+  - description: "Zenodo archive of all SMILD releases"
+    type: doi
+    value: 10.5281/zenodo.21346103
+  - description: "SMILD v0.1.0 — first release"
+    type: doi
+    value: 10.5281/zenodo.21346103
+keywords:
+  - diffusion MRI
+  - microstructure imaging
+  - Standard Model
+  - parameter identifiability
+  - degeneracy
+  - white matter
+  - NODDI
+  - reliability
+  - neuroimaging
+  - ABCD Study
+authors:
+  - family-names: "Beckwith"
+    given-names: "Travis"
+    orcid: "https://orcid.org/0000-0001-6128-8464"
+references:
+  - type: article
+    title: "Degeneracy in model parameter estimation for multi-compartmental diffusion in neuronal tissue"
+    authors:
+      - family-names: Jelescu
+        given-names: "Ioana O."
+      - family-names: Veraart
+        given-names: Jelle
+      - family-names: Fieremans
+        given-names: Els
+      - family-names: Novikov
+        given-names: "Dmitry S."
+    journal: "NMR in Biomedicine"
+    year: 2016
+    volume: 29
+    issue: 1
+    start: 33
+    end: 47
+    doi: 10.1002/nbm.3450
+  - type: article
+    title: "Rotationally-invariant mapping of scalar and orientational metrics of neuronal microstructure with diffusion MRI"
+    authors:
+      - family-names: Novikov
+        given-names: "Dmitry S."
+      - family-names: Veraart
+        given-names: Jelle
+      - family-names: Jelescu
+        given-names: "Ioana O."
+      - family-names: Fieremans
+        given-names: Els
+    journal: NeuroImage
+    year: 2018
+    volume: 174
+    start: 518
+    end: 538
+    doi: 10.1016/j.neuroimage.2018.03.006
+  - type: article
+    title: "Quantifying brain microstructure with diffusion MRI: theory and parameter estimation"
+    authors:
+      - family-names: Novikov
+        given-names: "Dmitry S."
+      - family-names: Fieremans
+        given-names: Els
+      - family-names: Jespersen
+        given-names: "Sune N."
+      - family-names: Kiselev
+        given-names: "Valerij G."
+    journal: "NMR in Biomedicine"
+    year: 2019
+    volume: 32
+    issue: 4
+    doi: 10.1002/nbm.3998
+  - type: article
+    title: "Resolving degeneracy in diffusion MRI biophysical model parameter estimation using double diffusion encoding"
+    authors:
+      - family-names: Coelho
+        given-names: Santiago
+      - family-names: Pozo
+        given-names: "Jose M."
+      - family-names: Jespersen
+        given-names: "Sune N."
+      - family-names: Jones
+        given-names: "Derek K."
+      - family-names: Frangi
+        given-names: "Alejandro F."
+    journal: "Magnetic Resonance in Medicine"
+    year: 2019
+    volume: 82
+    issue: 1
+    start: 395
+    end: 410
+    doi: 10.1002/mrm.27714

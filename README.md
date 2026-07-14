@@ -5,6 +5,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21346103.svg)](https://doi.org/10.5281/zenodo.21346103)
 [![Status: Early Development](https://img.shields.io/badge/status-early%20development-orange.svg)]()
 
 ---
@@ -59,7 +60,7 @@ On synthetic single-fiber Standard-Model data (b = 500/1000/2000/3000 s/mm², AB
 ## Quick start
 
 ```bash
-git clone https://github.com/you/smild.git
+git clone https://github.com/TravisBeckwith/SMILD.git
 cd smild
 pip install -e ".[dev]"
 
@@ -164,18 +165,65 @@ smild/
 
 ## Citation
 
-If you use SMILD in your research, please cite:
+If you use SMILD in your research, please cite the software and the foundational papers on the Standard Model degeneracy.
 
+### Citing the software
+
+**APA**
 ```
-[citation to be added on first release]
+Beckwith, T. (2026). SMILD: Standard Model Inter-branch Likelihood Distance
+(Version 0.1.0) [Computer software]. Zenodo.
+https://doi.org/10.5281/zenodo.21346103
 ```
 
-and the foundational work on the Standard Model degeneracy:
+**BibTeX**
+```bibtex
+@software{Beckwith_SMILD_2026,
+  author    = {Beckwith, Travis},
+  title     = {{SMILD: Standard Model Inter-branch Likelihood Distance}},
+  version   = {0.1.0},
+  year      = {2026},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.21346103},
+  url       = {https://github.com/TravisBeckwith/SMILD}
+}
+```
 
-- Jelescu IO, Veraart J, Fieremans E, Novikov DS. Degeneracy in model parameter estimation for multi-compartmental diffusion in neuronal tissue. *NMR in Biomedicine.* 2016;29(1):33–47. doi:10.1002/nbm.3450.
-- Novikov DS, Veraart J, Jelescu IO, Fieremans E. Rotationally-invariant mapping of scalar and orientational metrics of neuronal microstructure with diffusion MRI. *NeuroImage.* 2018;174:518–538. doi:10.1016/j.neuroimage.2018.03.006.
-- Novikov DS, Fieremans E, Jespersen SN, Kiselev VG. Quantifying brain microstructure with diffusion MRI: theory and parameter estimation. *NMR in Biomedicine.* 2019;32(4):e3998. doi:10.1002/nbm.3998.
-- Coelho S, Pozo JM, Jespersen SN, Jones DK, Frangi AF. Resolving degeneracy in diffusion MRI biophysical model parameter estimation using double diffusion encoding. *Magnetic Resonance in Medicine.* 2019;82(1):395–410. doi:10.1002/mrm.27714.
+
+
+---
+
+### Foundational references
+
+SMILD is grounded in and should be read alongside the following papers, which established the Standard Model degeneracy and its implications:
+
+**The degeneracy** (the problem SMILD measures):
+- Jelescu IO, Veraart J, Fieremans E, Novikov DS. Degeneracy in model parameter estimation for multi-compartmental diffusion in neuronal tissue. *NMR in Biomedicine.* 2016;29(1):33–47. doi:[10.1002/nbm.3450](https://doi.org/10.1002/nbm.3450)
+
+**The rotational-invariant framework** (the signal space in which SMILD is computed):
+- Novikov DS, Veraart J, Jelescu IO, Fieremans E. Rotationally-invariant mapping of scalar and orientational metrics of neuronal microstructure with diffusion MRI. *NeuroImage.* 2018;174:518–538. doi:[10.1016/j.neuroimage.2018.03.006](https://doi.org/10.1016/j.neuroimage.2018.03.006)
+
+**The Standard Model review** (theoretical context):
+- Novikov DS, Fieremans E, Jespersen SN, Kiselev VG. Quantifying brain microstructure with diffusion MRI: theory and parameter estimation. *NMR in Biomedicine.* 2019;32(4):e3998. doi:[10.1002/nbm.3998](https://doi.org/10.1002/nbm.3998)
+
+**Resolving the degeneracy** (why it requires additional acquisition):
+- Coelho S, Pozo JM, Jespersen SN, Jones DK, Frangi AF. Resolving degeneracy in diffusion MRI biophysical model parameter estimation using double diffusion encoding. *Magnetic Resonance in Medicine.* 2019;82(1):395–410. doi:[10.1002/mrm.27714](https://doi.org/10.1002/mrm.27714)
+
+**Validation cohort**:
+- Casey BJ, Cannonier T, Conley MI, et al. The Adolescent Brain Cognitive Development (ABCD) study: imaging acquisition across 21 sites. *Developmental Cognitive Neuroscience.* 2018;32:43–54. doi:[10.1016/j.dcn.2018.03.001](https://doi.org/10.1016/j.dcn.2018.03.001)
+- Hagler DJ Jr, Hatton S, Cornejo MD, et al. Image processing and analysis methods for the Adolescent Brain Cognitive Development Study. *NeuroImage.* 2019;202:116091. doi:[10.1016/j.neuroimage.2019.116091](https://doi.org/10.1016/j.neuroimage.2019.116091)
+
+---
+
+## Zenodo
+
+The v0.1.0 Zenodo record is live: [doi.org/10.5281/zenodo.21346103](https://doi.org/10.5281/zenodo.21346103).
+
+**For future releases**
+1. Update `version` in `pyproject.toml`, `smild/__init__.py`, `CITATION.cff`, and `.zenodo.json`.
+2. Create a new GitHub release with a new version tag (e.g. `v0.2.0`). Zenodo archives it automatically.
+3. Zenodo mints a new version-specific DOI for each release. The concept DOI (`10.5281/zenodo.21346103`, pointing to "all versions") stays the same — use it in the README badge and general citations. Use version-specific DOIs in methods papers that pin a specific release.
+4. Add the new version DOI to the `identifiers` list in `CITATION.cff`.
 
 ---
 
