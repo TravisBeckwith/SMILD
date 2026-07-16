@@ -5,7 +5,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21346103.svg)](https://doi.org/10.5281/zenodo.21346103)
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21346103-blue)](https://doi.org/10.5281/zenodo.21346103)
 [![Status: Early Development](https://img.shields.io/badge/status-early%20development-orange.svg)]()
 
 ---
@@ -61,7 +61,7 @@ On synthetic single-fiber Standard-Model data (b = 500/1000/2000/3000 s/mm², AB
 
 ```bash
 git clone https://github.com/TravisBeckwith/SMILD.git
-cd smild
+cd SMILD
 pip install -e ".[dev]"
 
 # Run the proof of concept
@@ -93,7 +93,7 @@ See `docs/SMILD_KnowledgeBase_Theory_Methods.docx` for the full derivation, all 
 
 ## Integration with dwiforge
 
-SMILD is designed as a post-microstructure stage in the [dwiforge](https://github.com/you/dwiforge) diffusion MRI pipeline, consuming preprocessed DWIs from Stage 05 and optionally the NODDI outputs from Stage 07:
+SMILD is designed as a post-microstructure stage in the [dwiforge](https://github.com/TravisBeckwith/dwiforge) diffusion MRI pipeline, consuming preprocessed DWIs from Stage 05 and optionally the NODDI outputs from Stage 07:
 
 ```
 Stage 12a  rotational invariants + noise covariance
@@ -102,7 +102,7 @@ Stage 12c  SMILD map (per-voxel, per-parameter)
 Stage 12d  ROI extraction + QC panel
 ```
 
-The [dwiforge Stage 11 connectome-stats](https://github.com/you/dwiforge) CLR transform (compositional correction of connectome edge weights) is a companion output — together they provide both a microstructural reliability map and a statistically valid group-analysis-ready connectome.
+The [dwiforge Stage 11 connectome-stats](https://github.com/TravisBeckwith/dwiforge) CLR transform (compositional correction of connectome edge weights) is a companion output — together they provide both a microstructural reliability map and a statistically valid group-analysis-ready connectome.
 
 ---
 

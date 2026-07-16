@@ -1,10 +1,10 @@
 [build-system]
 requires = ["setuptools>=68", "wheel"]
-build-backend = "setuptools.backends.legacy:build"
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "smild"
-version = "0.1.0.dev0"
+version = "0.1.0"
 description = "Standard Model Inter-branch Likelihood Distance: voxelwise parameter identifiability for diffusion MRI"
 readme = "README.md"
 license = { file = "LICENSE" }
