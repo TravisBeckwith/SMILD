@@ -18,9 +18,8 @@ Quick start
 >>> b = np.array([0.5, 1.0, 2.0, 3.0])   # ms/um^2 (= b[s/mm^2] / 1000)
 >>> S = forward_powder(b, f=0.5, Da=2.2, De_par=1.6, De_perp=0.6)
 >>> sigma = np.full_like(b, 0.05)         # per-shell noise std
->>> score, delta_R, twin = smild(b, f=0.5, Da=2.2, De_par=1.6,
-...                              De_perp=0.6, sigma_S=sigma)
->>> print(f"SMILD = {score:.3f}  (0=identifiable, 1=degenerate)")
+>>> result = smild(b, f=0.5, Da=2.2, De_par=1.6, De_perp=0.6, sigma_S=sigma)
+>>> print(f"SMILD = {result.smild:.3f}  (0=identifiable, 1=degenerate)")
 
 References
 ----------

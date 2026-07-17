@@ -143,8 +143,8 @@ smild/
 │   ├── __init__.py
 │   ├── forward.py          # Standard Model forward model (powder-averaged)
 │   ├── smild.py            # Core SMILD computation
-│   ├── twin.py             # Degenerate-twin construction
-│   └── utils.py            # Noise, cumulants, helpers
+│   └── twin.py             # Degenerate-twin construction
+│   # utils.py (noise, cumulants, helpers) is planned but not yet added — see Roadmap
 ├── poc/                    # Proof of concept
 │   ├── smild_poc.py        # Core POC (forward + twin + SMILD)
 │   ├── smild_experiment.py # Validation experiments E1/E2/E3
