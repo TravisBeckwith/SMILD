@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-smdi_poc.py -- Proof of concept for the Standard Model Degeneracy Index (SMDI).
+smild_poc.py -- Proof of concept for the Standard Model Degeneracy Index (SMILD).
 
 Scope (honest):
     This is a controlled, single-fiber / powder-averaged proof of concept. We use
@@ -14,16 +14,16 @@ Scope (honest):
       2. add Rician noise at a realistic SNR,
       3. fit the diffusion + kurtosis cumulants,
       4. analytically recover BOTH branches (the +/- sign solutions),
-      5. compute SMDI as the noise-normalized separation between the branches
+      5. compute SMILD as the noise-normalized separation between the branches
          (Definition 1 from the methods document),
 
-    and then demonstrate that SMDI behaves as predicted: low (well-conditioned)
+    and then demonstrate that SMILD behaves as predicted: low (well-conditioned)
     where the branches are far apart, high (degenerate) where they coincide, and
     increasing with noise / decreasing with SNR.
 
     What this POC does NOT do: full orientation-dispersion ODF fitting, real ABCD
     data, or the RotInv/LEMONADE machinery for arbitrary ODFs. Those are the
-    production implementation; this establishes that the SMDI quantity is
+    production implementation; this establishes that the SMILD quantity is
     computable and behaves correctly on data where ground truth is known.
 
 Units: diffusivities in um^2/ms; b in ms/um^2 (i.e. b[s/mm^2]/1000).
@@ -169,24 +169,24 @@ def degenerate_twin(f, Da, De_par):
     return Da_tw, De_par_tw, M1, V
 
 
-def smdi_signal_separation(b, f, Da, De_par, De_perp, sigma_S):
+def smild_signal_separation(b, f, Da, De_par, De_perp, sigma_S):
     """
-    SMDI_sep = exp(-Delta_R^2 / 2), where Delta_R is the Mahalanobis distance,
+    SMILD_sep = exp(-Delta_R^2 / 2), where Delta_R is the Mahalanobis distance,
     in powder-signal space, between a voxel's ground-truth signal and its
     DEGENERATE TWIN's signal, given per-shell noise std sigma_S.
 
     This is Definition 1 of the methods document, made exact: it measures whether
     the data can distinguish the two branches. When the branches predict nearly
-    identical signals (small Delta_R), SMDI -> 1 (degenerate). When the data
-    separates them (large Delta_R), SMDI -> 0 (well-conditioned).
+    identical signals (small Delta_R), SMILD -> 1 (degenerate). When the data
+    separates them (large Delta_R), SMILD -> 0 (well-conditioned).
     """
     Da_tw, De_par_tw, M1, V = degenerate_twin(f, Da, De_par)
     S_a = forward_powder(b, f, Da, De_par, De_perp)
     S_b = forward_powder(b, f, Da_tw, De_par_tw, De_perp)
     diff = S_a - S_b
     delta_R = np.sqrt(np.sum((diff / sigma_S) ** 2))
-    smdi = np.exp(-0.5 * delta_R ** 2)
-    return smdi, delta_R, (Da_tw, De_par_tw), (S_a, S_b)
+    smild = np.exp(-0.5 * delta_R ** 2)
+    return smild, delta_R, (Da_tw, De_par_tw), (S_a, S_b)
 
 
 # ----------------------------------------------------------------------
@@ -206,10 +206,10 @@ def add_rician(S, snr, rng=RNG):
 def process_voxel(b_shells, f, Da, De_par, De_perp, snr,
                   n_dirs_per_shell=30, n_noise=200, rng=RNG):
     """
-    Compute SMDI for a voxel with known ground-truth SM parameters.
+    Compute SMILD for a voxel with known ground-truth SM parameters.
 
     The per-shell powder-signal noise std after averaging n_dirs directions is
-    sigma_S = 1/(snr * sqrt(n_dirs)). SMDI is the noise-normalized separation
+    sigma_S = 1/(snr * sqrt(n_dirs)). SMILD is the noise-normalized separation
     between the voxel's signal and its degenerate twin (Definition 1). We also
     report a Monte-Carlo spread by jittering the noise level to reflect estimation
     variability, so error bars are meaningful.
@@ -225,29 +225,29 @@ def process_voxel(b_shells, f, Da, De_par, De_perp, snr,
     sigma_S = np.full_like(b_shells, thermal_sigma / np.sqrt(n_dirs_per_shell),
                            dtype=float)
 
-    # The core SMDI is deterministic given (params, sigma). We add a small
+    # The core SMILD is deterministic given (params, sigma). We add a small
     # Monte-Carlo over noise realizations that perturb the empirical sigma
     # estimate, to produce a realistic spread.
-    smdis, delta_Rs = [], []
+    smilds, delta_Rs = [], []
     Da_tw, De_par_tw, M1, V = degenerate_twin(f, Da, De_par)
     for _ in range(n_noise):
         # empirical per-shell noise estimate varies run to run (chi-like):
         sig_hat = sigma_S * (1.0 + rng.normal(0, 0.10, size=b_shells.shape))
         sig_hat = np.clip(sig_hat, 1e-4, None)
-        smdi, dR, _, _ = smdi_signal_separation(
+        smild, dR, _, _ = smild_signal_separation(
             b_shells, f, Da, De_par, De_perp, sig_hat)
-        smdis.append(smdi); delta_Rs.append(dR)
+        smilds.append(smild); delta_Rs.append(dR)
 
-    smdis = np.array(smdis)
+    smilds = np.array(smilds)
     return dict(
         f=f, Da=Da, De_par=De_par, De_perp=De_perp, snr=snr,
-        smdi_mean=float(np.mean(smdis)),
-        smdi_std=float(np.std(smdis)),
+        smild_mean=float(np.mean(smilds)),
+        smild_std=float(np.std(smilds)),
         delta_R_mean=float(np.mean(delta_Rs)),
         sep_mean=abs(Da - De_par),                 # recovered == GT here (exact twin)
         twin=(float(Da_tw), float(De_par_tw)),
         ground_truth_sep=abs(Da - De_par),
-        n_valid=len(smdis),
+        n_valid=len(smilds),
     )
 
 
@@ -262,5 +262,5 @@ if __name__ == "__main__":
         r = process_voxel(b, f=0.5, Da=Da, De_par=De_par, De_perp=0.6,
                           snr=30, n_dirs_per_shell=30)
         print(f"{label:34s}  GT_sep={r['ground_truth_sep']:.2f}  "
-              f"SMDI={r['smdi_mean']:.3f}  deltaR={r['delta_R_mean']:.2f}  "
+              f"SMILD={r['smild_mean']:.3f}  deltaR={r['delta_R_mean']:.2f}  "
               f"twin=({r['twin'][0]:.2f},{r['twin'][1]:.2f})")
